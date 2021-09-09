@@ -87,7 +87,7 @@ final class DbIpClientTest extends TestCase
         $this->assertEquals($apiStatus->getApiKey(), 'free');
         $this->assertEquals($apiStatus->getQueriesPerDay(), 0);
         $this->assertEquals($apiStatus->getQueriesLeft(), 969);
-        $this->assertEquals($apiStatus->getStatus(), 'unknow');
+        $this->assertEquals($apiStatus->getStatus(), 'unknown');
     }
 
     private function getResponse(string $content, int $statusCode = 200): ResponseInterface
