@@ -7,18 +7,20 @@ namespace Scullwm\DbIpClient;
 use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
+use JsonException;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Scullwm\DbIpClient\Exception\InvalidCredentials;
 use Scullwm\DbIpClient\Exception\InvalidServerResponse;
 use Scullwm\DbIpClient\Exception\QuotaExceeded;
+use Throwable;
+use Webmozart\Assert\Assert;
 
 use function json_decode;
-use function json_last_error;
 use function sprintf;
 
-use const JSON_ERROR_NONE;
+use const JSON_THROW_ON_ERROR;
 
 class Client
 {
@@ -58,33 +60,34 @@ class Client
     /**
      * @psalm-return array<string, string>
      *
+     * @throws JsonException
+     *
      * @todo can we get the right array shape here?
      */
     protected function getParsedResponse(RequestInterface $request): array
     {
         $response = $this->getHttpClient()->sendRequest($request);
 
-        $statusCode = $response->getStatusCode();
-        if ($statusCode === 401 || $statusCode === 403) {
-            throw new InvalidCredentials();
-        }
-
-        if ($statusCode === 429) {
-            throw new QuotaExceeded();
-        }
+        $statusCode = match ($statusCode = $response->getStatusCode()) {
+            401, 403 => throw new InvalidCredentials(),
+            429 => throw new QuotaExceeded(),
+            default => $statusCode,
+        };
 
         if ($statusCode >= 300) {
             throw InvalidServerResponse::create((string) $request->getUri(), $statusCode);
         }
 
         $body = (string) $response->getBody();
-        if ($body === '') {
-            throw InvalidServerResponse::emptyResponse((string) $request->getUri());
-        }
 
-        $content = json_decode($body, true);
+        Assert::stringNotEmpty(
+            $body,
+            sprintf('The server returned an empty response for query "%s".', $request->getUri())
+        );
 
-        if ($content && json_last_error() !== JSON_ERROR_NONE) {
+        try {
+            $content = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        } catch (Throwable) {
             throw InvalidServerResponse::invalidJson((string) $request->getUri(), $body);
         }
 
