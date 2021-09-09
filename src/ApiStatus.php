@@ -20,10 +20,10 @@ class ApiStatus
     public static function new(array $data, string $defaultApiToken = ''): self
     {
         return new self(
-            (isset($data['apiKey'])) ? $data['apiKey'] : $defaultApiToken,
-            (isset($data['queriesPerDay'])) ? $data['queriesPerDay'] : 0,
-            (isset($data['queriesLeft'])) ? $data['queriesLeft'] : 0,
-            (isset($data['status'])) ? $data['status'] : 'unknow'
+            $data['apiKey'] ?? $defaultApiToken,
+            $data['queriesPerDay'] ?? 0,
+            $data['queriesLeft'] ?? 0,
+            $data['status'] ?? 'unknow'
         );
     }
 

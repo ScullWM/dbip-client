@@ -52,15 +52,15 @@ class IpDetails
     {
         return new self(
             $data['ipAddress'],
-            (isset($data['continentCode'])) ? $data['continentCode'] : '',
-            (isset($data['continentName'])) ? $data['continentName'] : '',
-            (isset($data['countryCode'])) ? $data['countryCode'] : '',
-            (isset($data['countryName'])) ? $data['countryName'] : '',
-            (isset($data['isEuMember'])) ? $data['isEuMember'] : false,
-            (isset($data['stateProv'])) ? $data['stateProv'] : '',
-            (isset($data['city'])) ? $data['city'] : '',
-            (isset($data['threatLevel'])) ? $data['threatLevel'] : '',
-            (isset($data['isp'])) ? $data['isp'] : ''
+            $data['continentCode'] ?? '',
+            $data['continentName'] ?? '',
+            $data['countryCode'] ?? '',
+            $data['countryName'] ?? '',
+            $data['isEuMember'] ?? false,
+            $data['stateProv'] ?? '',
+            $data['city'] ?? '',
+            $data['threatLevel'] ?? '',
+            $data['isp'] ?? ''
         );
     }
 
