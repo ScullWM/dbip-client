@@ -28,8 +28,8 @@ class Client
 
     private string $token;
 
-    private const API_ENDPOINT_V2_IP_DETAILS = 'http://api.db-ip.com/v2/%s/%s';
-    private const API_ENDPOINT_V2_API_STATUS = 'http://api.db-ip.com/v2/%s';
+    private const API_ENDPOINT_V2_IP_DETAILS = 'https://api.db-ip.com/v2/%s/%s';
+    private const API_ENDPOINT_V2_API_STATUS = 'https://api.db-ip.com/v2/%s';
 
     public function __construct(
         string $token,
