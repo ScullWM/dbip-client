@@ -6,6 +6,6 @@ namespace Scullwm\DbIpClient\Exception;
 
 use RuntimeException;
 
-final class QuotaExceededException extends RuntimeException
+final class InvalidCredentials extends RuntimeException
 {
 }

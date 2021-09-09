@@ -19,6 +19,10 @@ class ApiThrottling
         $this->status        = $status;
     }
 
+    /**
+     * @param (string|int)[] $data
+     * @psalm-param array{apiKey: 'string', queriesPerDay: int, queriesLeft: int, status: string} $data
+     */
     public static function new(array $data, string $defaultApiToken = ''): self
     {
         return new self(

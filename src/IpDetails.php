@@ -50,6 +50,20 @@ class IpDetails
         $this->isp           = $isp;
     }
 
+    /**
+     * @param array<array-key, string|bool> $data
+     * @psalm-param array{
+     *   ipAddress: string,
+     *   ?continentName: string,
+     *   ?countryCode: string,
+     *   ?countryName: string,
+     *   ?isEuMember: string,
+     *   ?stateProv: string,
+     *   ?city: string,
+     *   ?threatLevel: string,
+     *   ?isp: string
+     * } $data
+     */
     public static function new(array $data): self
     {
         return new self(
