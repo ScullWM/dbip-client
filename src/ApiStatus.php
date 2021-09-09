@@ -23,7 +23,7 @@ class ApiStatus
             $data['apiKey'] ?? $defaultApiToken,
             $data['queriesPerDay'] ?? 0,
             $data['queriesLeft'] ?? 0,
-            $data['status'] ?? 'unknow'
+            $data['status'] ?? 'unknown'
         );
     }
 
