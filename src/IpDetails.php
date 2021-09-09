@@ -16,7 +16,7 @@ class IpDetails
 
     private string $countryName;
 
-    private string $isEuMember;
+    private bool $isEuMember;
 
     private string $stateProv;
 
