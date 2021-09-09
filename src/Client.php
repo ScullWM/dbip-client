@@ -3,7 +3,7 @@
 namespace Scullwm\DbIpClient;
 
 use Http\Client\HttpClient;
-use Scullwm\DbIpClient\ApiStatus;
+use Scullwm\DbIpClient\ApiThrottling;
 use Scullwm\DbIpClient\IpDetails;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -39,11 +39,11 @@ class Client
         return IpDetails::new($this->getParsedResponse($request));
     }
 
-    public function getApiStatus(): ApiStatus
+    public function getApiStatus(): ApiThrottling
     {
         $request = $this->getRequest(sprintf(self::API_ENDPOINT_V2_API_STATUS, $this->token));
 
-        return ApiStatus::new($this->getParsedResponse($request), $this->token);
+        return ApiThrottling::new($this->getParsedResponse($request), $this->token);
     }
 
     protected function getParsedResponse(RequestInterface $request): array

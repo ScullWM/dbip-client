@@ -2,7 +2,7 @@
 
 namespace Scullwm\DbIpClient;
 
-class ApiStatus
+class ApiThrottling
 {
     private string $apiKey;
     private int $queriesPerDay;
