@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Scullwm\DbIpClient;
 
 class IpDetails
@@ -36,16 +38,16 @@ class IpDetails
         string $threatLevel,
         string $isp
     ) {
-        $this->ipAddress = $ipAddress;
+        $this->ipAddress     = $ipAddress;
         $this->continentCode = $continentCode;
         $this->continentName = $continentName;
-        $this->countryCode = $countryCode;
-        $this->countryName = $countryName;
-        $this->stateProv = $stateProv;
-        $this->isEuMember = $isEuMember;
-        $this->city = $city;
-        $this->threatLevel = $threatLevel;
-        $this->isp = $isp;
+        $this->countryCode   = $countryCode;
+        $this->countryName   = $countryName;
+        $this->stateProv     = $stateProv;
+        $this->isEuMember    = $isEuMember;
+        $this->city          = $city;
+        $this->threatLevel   = $threatLevel;
+        $this->isp           = $isp;
     }
 
     public static function new(array $data): self

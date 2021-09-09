@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Scullwm\DbIpClient;
 
 class ApiThrottling
@@ -11,10 +13,10 @@ class ApiThrottling
 
     public function __construct(string $apiKey, int $queriesPerDay, int $queriesLeft, string $status)
     {
-        $this->apiKey = $apiKey;
+        $this->apiKey        = $apiKey;
         $this->queriesPerDay = $queriesPerDay;
-        $this->queriesLeft = $queriesLeft;
-        $this->status = $status;
+        $this->queriesLeft   = $queriesLeft;
+        $this->status        = $status;
     }
 
     public static function new(array $data, string $defaultApiToken = ''): self

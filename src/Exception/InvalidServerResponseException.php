@@ -1,8 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Scullwm\DbIpClient\Exception;
 
-final class InvalidServerResponseException extends \RuntimeException
+use RuntimeException;
+
+use function sprintf;
+
+final class InvalidServerResponseException extends RuntimeException
 {
     public static function create(string $query, int $code = 0): self
     {

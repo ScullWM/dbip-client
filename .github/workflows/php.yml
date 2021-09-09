@@ -29,5 +29,5 @@ jobs:
     - name: Run test suite
       run: ./vendor/bin/phpunit
 
-    - name: Run php-cs-fixer
-      run: ./vendor/bin/php-cs-fixer fix
+    - name: Run phpcs
+      run: ./vendor/bin/phpcs

@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Scullwm\DbIpClient\Exception;
 
-final class QuotaExceededException extends \RuntimeException
+use RuntimeException;
+
+final class QuotaExceededException extends RuntimeException
 {
 }

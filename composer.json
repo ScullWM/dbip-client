@@ -18,7 +18,7 @@
         "psr/http-client": "^1.0"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "doctrine/coding-standard": "^9.0",
         "nyholm/psr7": "^1.4",
         "php-http/message": "^1.12",
         "php-http/mock-client": "^1.5",

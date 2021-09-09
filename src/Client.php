@@ -1,18 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Scullwm\DbIpClient;
 
 use Http\Client\HttpClient;
-use Scullwm\DbIpClient\ApiThrottling;
-use Scullwm\DbIpClient\IpDetails;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestInterface;
-use Http\Discovery\Psr18ClientDiscovery;
 use Http\Discovery\Psr17FactoryDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
-use Scullwm\DbIpClient\Exception\QuotaExceededException;
+use Psr\Http\Message\RequestInterface;
 use Scullwm\DbIpClient\Exception\InvalidCredentialsException;
 use Scullwm\DbIpClient\Exception\InvalidServerResponseException;
+use Scullwm\DbIpClient\Exception\QuotaExceededException;
+
+use function json_decode;
+use function json_last_error;
+use function sprintf;
+
+use const JSON_ERROR_NONE;
 
 class Client
 {
@@ -25,10 +31,10 @@ class Client
     private const API_ENDPOINT_V2_IP_DETAILS = 'http://api.db-ip.com/v2/%s/%s';
     private const API_ENDPOINT_V2_API_STATUS = 'http://api.db-ip.com/v2/%s';
 
-    public function __construct(string $token, ClientInterface $client = null, RequestFactoryInterface $factory = null)
+    public function __construct(string $token, ?ClientInterface $client = null, ?RequestFactoryInterface $factory = null)
     {
-        $this->token = $token;
-        $this->client = $client ?: Psr18ClientDiscovery::find();
+        $this->token          = $token;
+        $this->client         = $client ?: Psr18ClientDiscovery::find();
         $this->messageFactory = $factory ?: Psr17FactoryDiscovery::findRequestFactory();
     }
 
@@ -51,16 +57,20 @@ class Client
         $response = $this->getHttpClient()->sendRequest($request);
 
         $statusCode = $response->getStatusCode();
-        if (401 === $statusCode || 403 === $statusCode) {
+        if ($statusCode === 401 || $statusCode === 403) {
             throw new InvalidCredentialsException();
-        } elseif (429 === $statusCode) {
+        }
+
+        if ($statusCode === 429) {
             throw new QuotaExceededException();
-        } elseif ($statusCode >= 300) {
+        }
+
+        if ($statusCode >= 300) {
             throw InvalidServerResponseException::create((string) $request->getUri(), $statusCode);
         }
 
         $body = (string) $response->getBody();
-        if ('' === $body) {
+        if ($body === '') {
             throw InvalidServerResponseException::emptyResponse((string) $request->getUri());
         }
 

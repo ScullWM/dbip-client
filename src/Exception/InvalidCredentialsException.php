@@ -1,7 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Scullwm\DbIpClient\Exception;
 
-final class InvalidCredentialsException extends \RuntimeException
+use RuntimeException;
+
+final class InvalidCredentialsException extends RuntimeException
 {
 }
