@@ -15,7 +15,8 @@
         "php-http/discovery": "^1.14",
         "php-http/httplug": "^2.2",
         "php-http/message-factory": "^1.0",
-        "psr/http-client": "^1.0"
+        "psr/http-client": "^1.0",
+        "ext-json": "*"
     },
     "require-dev": {
         "doctrine/coding-standard": "^9.0",
