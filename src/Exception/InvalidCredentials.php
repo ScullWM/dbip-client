@@ -6,6 +6,6 @@ namespace Scullwm\DbIpClient\Exception;
 
 use RuntimeException;
 
-final class InvalidCredentials extends RuntimeException
+final class InvalidCredentials extends RuntimeException implements DbIpError
 {
 }

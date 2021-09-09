@@ -8,7 +8,7 @@ use RuntimeException;
 
 use function sprintf;
 
-final class InvalidServerResponse extends RuntimeException
+final class InvalidServerResponse extends RuntimeException implements DbIpError
 {
     public static function create(string $query, int $code = 0): self
     {

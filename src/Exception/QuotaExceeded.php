@@ -6,6 +6,6 @@ namespace Scullwm\DbIpClient\Exception;
 
 use RuntimeException;
 
-final class QuotaExceeded extends RuntimeException
+final class QuotaExceeded extends RuntimeException implements DbIpError
 {
 }
