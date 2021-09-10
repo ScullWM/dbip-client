@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Scullwm\DbIpClient;
 
-use Http\Client\HttpClient;
 use Http\Discovery\Psr17FactoryDiscovery;
 use Http\Discovery\Psr18ClientDiscovery;
-use JsonException;
+use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -60,7 +59,7 @@ class Client
     /**
      * @psalm-return array<string, string>
      *
-     * @throws JsonException
+     * @throws ClientExceptionInterface
      *
      * @todo can we get the right array shape here?
      */
@@ -99,7 +98,7 @@ class Client
         return $this->getMessageFactory()->createRequest('GET', $url);
     }
 
-    protected function getHttpClient(): HttpClient
+    protected function getHttpClient(): ClientInterface
     {
         return $this->client;
     }
