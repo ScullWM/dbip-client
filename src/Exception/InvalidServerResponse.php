@@ -20,11 +20,6 @@ final class InvalidServerResponse extends RuntimeException implements DbIpError
         ));
     }
 
-    public static function emptyResponse(string $query): self
-    {
-        return new self(sprintf('The server returned an empty response for query "%s".', $query));
-    }
-
     public static function invalidJson(string $query, string $body): self
     {
         return new self(sprintf(
