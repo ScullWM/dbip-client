@@ -21,23 +21,19 @@ use function sprintf;
 
 use const JSON_THROW_ON_ERROR;
 
-class Client
+final class Client
 {
     private ClientInterface $client;
-
     private RequestFactoryInterface $messageFactory;
-
-    private string $token;
 
     private const API_ENDPOINT_V2_IP_DETAILS = 'https://api.db-ip.com/v2/%s/%s';
     private const API_ENDPOINT_V2_API_STATUS = 'https://api.db-ip.com/v2/%s';
 
     public function __construct(
-        string $token,
+        private string $token,
         ?ClientInterface $client = null,
         ?RequestFactoryInterface $factory = null
     ) {
-        $this->token          = $token;
         $this->client         = $client ?: Psr18ClientDiscovery::find();
         $this->messageFactory = $factory ?: Psr17FactoryDiscovery::findRequestFactory();
     }
@@ -60,8 +56,6 @@ class Client
      * @psalm-return array<string, string>
      *
      * @throws ClientExceptionInterface
-     *
-     * @todo can we get the right array shape here?
      */
     protected function getParsedResponse(RequestInterface $request): array
     {

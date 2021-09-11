@@ -4,50 +4,20 @@ declare(strict_types=1);
 
 namespace Scullwm\DbIpClient;
 
-class IpDetails
+final class IpDetails
 {
-    private string $ipAddress;
-
-    private string $continentCode;
-
-    private string $continentName;
-
-    private string $countryCode;
-
-    private string $countryName;
-
-    private bool $isEuMember;
-
-    private string $stateProv;
-
-    private string $city;
-
-    private string $threatLevel;
-
-    private string $isp;
-
     private function __construct(
-        string $ipAddress,
-        string $continentCode,
-        string $continentName,
-        string $countryCode,
-        string $countryName,
-        bool $isEuMember,
-        string $stateProv,
-        string $city,
-        string $threatLevel,
-        string $isp
+        private string $ipAddress,
+        private string $continentCode,
+        private string $continentName,
+        private string $countryCode,
+        private string $countryName,
+        private bool $isEuMember,
+        private string $stateProv,
+        private string $city,
+        private string $threatLevel,
+        private string $isp
     ) {
-        $this->ipAddress     = $ipAddress;
-        $this->continentCode = $continentCode;
-        $this->continentName = $continentName;
-        $this->countryCode   = $countryCode;
-        $this->countryName   = $countryName;
-        $this->stateProv     = $stateProv;
-        $this->isEuMember    = $isEuMember;
-        $this->city          = $city;
-        $this->threatLevel   = $threatLevel;
-        $this->isp           = $isp;
     }
 
     /**

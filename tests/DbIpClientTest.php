@@ -67,11 +67,13 @@ final class DbIpClientTest extends TestCase
 
         $response = $this->getResponse(file_get_contents(__DIR__ . '/Fixtures/status.json'));
         $client->setDefaultResponse($response);
-        $dbipClient = new TestedClient('d74be40a1acd2b5b356f67a0f6a5e1be', $client);
+        $hash = 'd74be40a1acd2b5b356f67a0f6a5e1be';
+
+        $dbipClient = new TestedClient($hash, $client);
 
         $apiStatus = $dbipClient->getApiStatus();
 
-        self::assertEquals('d74be40a1acd2b5b356f67a0f6a5e1be', $apiStatus->getApiKey());
+        self::assertEquals($hash, $apiStatus->getApiKey());
         self::assertEquals(10000, $apiStatus->getQueriesPerDay());
         self::assertEquals(9986, $apiStatus->getQueriesLeft());
         self::assertEquals('active', $apiStatus->getStatus());
