@@ -16,7 +16,8 @@ final class IpDetails
         private string $stateProv,
         private string $city,
         private string $threatLevel,
-        private string $isp
+        private string $isp,
+        private bool $isCrawler
     ) {
     }
 
@@ -27,11 +28,12 @@ final class IpDetails
      *   ?continentName: string,
      *   ?countryCode: string,
      *   ?countryName: string,
-     *   ?isEuMember: string,
+     *   ?isEuMember: bool,
      *   ?stateProv: string,
      *   ?city: string,
      *   ?threatLevel: string,
-     *   ?isp: string
+     *   ?isp: string,
+     *   ?isCrawler: bool
      * } $data
      */
     public static function new(array $data): self
@@ -46,7 +48,8 @@ final class IpDetails
             $data['stateProv'] ?? '',
             $data['city'] ?? '',
             $data['threatLevel'] ?? '',
-            $data['isp'] ?? ''
+            $data['isp'] ?? '',
+            $data['isCrawler'] ?? false
         );
     }
 
@@ -103,5 +106,10 @@ final class IpDetails
     public function isRisky(): bool
     {
         return $this->threatLevel !== 'low';
+    }
+
+    public function isCrawler(): bool
+    {
+        return $this->isCrawler;
     }
 }
