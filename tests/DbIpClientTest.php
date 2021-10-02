@@ -59,6 +59,7 @@ final class DbIpClientTest extends TestCase
         self::assertEquals('North Charleston', $ipDetails->getCity());
         self::assertEquals('low', $ipDetails->getThreatLevel());
         self::assertEquals('AT&T Services', $ipDetails->getIsp());
+        self::assertEquals(false, $ipDetails->isProxy());
         self::assertEquals(false, $ipDetails->isCrawler());
     }
 

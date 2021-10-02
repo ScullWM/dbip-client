@@ -16,8 +16,9 @@ final class IpDetails
         private string $stateProv,
         private string $city,
         private string $threatLevel,
-        private string $isp,
-        private bool $isCrawler
+        private bool $isProxy,
+        private bool $isCrawler,
+        private string $isp
     ) {
     }
 
@@ -32,8 +33,9 @@ final class IpDetails
      *   ?stateProv: string,
      *   ?city: string,
      *   ?threatLevel: string,
-     *   ?isp: string,
-     *   ?isCrawler: bool
+     *   ?isProxy: string,
+     *   ?isCrawler: bool,
+     *   ?isp: string
      * } $data
      */
     public static function new(array $data): self
@@ -48,8 +50,9 @@ final class IpDetails
             $data['stateProv'] ?? '',
             $data['city'] ?? '',
             $data['threatLevel'] ?? '',
-            $data['isp'] ?? '',
-            $data['isCrawler'] ?? false
+            $data['isProxy'] ?? false,
+            $data['isCrawler'] ?? false,
+            $data['isp'] ?? ''
         );
     }
 
@@ -106,6 +109,11 @@ final class IpDetails
     public function isRisky(): bool
     {
         return $this->threatLevel !== 'low';
+    }
+
+    public function isProxy(): bool
+    {
+        return $this->isProxy;
     }
 
     public function isCrawler(): bool
