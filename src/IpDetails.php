@@ -12,6 +12,7 @@ final class IpDetails
         private string $continentName,
         private string $countryCode,
         private string $countryName,
+        private string $stateProvCode,
         private bool $isEuMember,
         private string $stateProv,
         private string $city,
@@ -29,6 +30,7 @@ final class IpDetails
      *   ?continentName: string,
      *   ?countryCode: string,
      *   ?countryName: string,
+     *   ?stateProvCode: string,
      *   ?isEuMember: bool,
      *   ?stateProv: string,
      *   ?city: string,
@@ -46,6 +48,7 @@ final class IpDetails
             $data['continentName'] ?? '',
             $data['countryCode'] ?? '',
             $data['countryName'] ?? '',
+            $data['stateProvCode'] ?? '',
             $data['isEuMember'] ?? false,
             $data['stateProv'] ?? '',
             $data['city'] ?? '',
@@ -81,14 +84,19 @@ final class IpDetails
         return $this->countryName;
     }
 
-    public function isEuMember(): bool
+    public function getStateProvCode(): string
     {
-        return $this->isEuMember;
+        return $this->stateProvCode;
     }
 
     public function getStateProv(): string
     {
         return $this->stateProv;
+    }
+
+    public function isEuMember(): bool
+    {
+        return $this->isEuMember;
     }
 
     public function getCity(): string
