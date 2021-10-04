@@ -15,6 +15,8 @@ final class IpDetails
         private bool $isEuMember,
         private string $stateProv,
         private string $city,
+        private float $latitude,
+        private float $longitude,
         private string $threatLevel,
         private bool $isProxy,
         private bool $isCrawler,
@@ -32,6 +34,8 @@ final class IpDetails
      *   ?isEuMember: bool,
      *   ?stateProv: string,
      *   ?city: string,
+     *   ?latitude: float,
+     *   ?longitude: float,
      *   ?threatLevel: string,
      *   ?isProxy: string,
      *   ?isCrawler: bool,
@@ -49,6 +53,8 @@ final class IpDetails
             $data['isEuMember'] ?? false,
             $data['stateProv'] ?? '',
             $data['city'] ?? '',
+            $data['latitude'] ?? 0.0,
+            $data['longitude'] ?? 0.0,
             $data['threatLevel'] ?? '',
             $data['isProxy'] ?? false,
             $data['isCrawler'] ?? false,
@@ -94,6 +100,16 @@ final class IpDetails
     public function getCity(): string
     {
         return $this->city;
+    }
+
+    public function getLatitude(): float
+    {
+        return $this->latitude;
+    }
+
+    public function getLongitude(): float
+    {
+        return $this->longitude;
     }
 
     public function getThreatLevel(): string
