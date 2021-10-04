@@ -56,6 +56,7 @@ final class DbIpClientTest extends TestCase
         self::assertEquals('US', $ipDetails->getCountryCode());
         self::assertEquals('États-Unis', $ipDetails->getCountryName());
         self::assertEquals('Caroline du Sud', $ipDetails->getStateProv());
+        self::assertEquals('SC', $ipDetails->getStateProvCode());
         self::assertEquals('North Charleston', $ipDetails->getCity());
         self::assertEquals('low', $ipDetails->getThreatLevel());
         self::assertEquals('AT&T Services', $ipDetails->getIsp());
